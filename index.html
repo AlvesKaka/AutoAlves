@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Entrando...</title></title>
 
+  <script>
+    const placeId = "109983668079237"; // FIXO
+
+    function getJobId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("jobId");
+    }
+
+    window.onload = () => {
+      const jobId = getJobId();
+
+      if (!jobId) {
+        document.body.innerHTML = "JobId não fornecido.";
+        return;
+      }
+
+      const deepLink = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
+      const fallback = `https://www.roblox.com/games/${placeId}`;
+
+      // tenta abrir o Roblox
+      window.location.href = deepLink;
+
+      // fallback se não abrir
+      setTimeout(() => {
+        window.location.href = fallback;
+      }, 2000);
+    };
+  </script>
+</head>
+
+<body>
+  <p>Joining...</p>
+</body>
+</html>
